@@ -5,7 +5,6 @@ import start.model.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Repository
@@ -22,11 +21,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User getUserId(int id) {
-    TypedQuery<User> userTypedQuery =
-             entityManager.createQuery("SELECT u FROM User u where u.id = :id", User.class);
-             userTypedQuery.setParameter("id", id);
-
-        return userTypedQuery.getSingleResult();
+        return entityManager.find(User.class, id);
     }
 
     @Override
@@ -39,12 +34,13 @@ public class UserDaoImpl implements UserDao {
         User user = getUserId(i);
         user.setName(userNew.getName());
         user.setAge(userNew.getAge());
-        user.setEmail(userNew.getEmail());
+        user.setEmail(user.getEmail());
+
     }
 
     @Override
     public void deleteUser(int id) {
-       entityManager.createQuery("delete from User where id = :id").setParameter("id", id).executeUpdate();
+        entityManager.remove(getUserId(id));
     }
 
 

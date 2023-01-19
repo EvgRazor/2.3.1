@@ -55,8 +55,9 @@ public class UserController {
     }
 
     @PatchMapping("/{id}")
-    public String getUpdate (@ModelAttribute("user") User user, BindingResult bindingResult, @PathVariable ("id") int  id) {
-        if (bindingResult.hasErrors()) {
+    public String getUpdate (@ModelAttribute("user") @Valid User user, BindingResult bindingResult, @PathVariable ("id") int  id) {
+        System.out.println("!!!");
+       if (bindingResult.hasErrors()) {
           return  "edit";
         }
         userService.updateUser(id, user);
