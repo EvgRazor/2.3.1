@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <spa><b>ID:</b> </spa><span th:text="${user.getId()}"/>;<br>
+    <spa><b>Name:</b> </spa><span th:text="${user.getName()}"/>;<br>
+    <spa><b>Age:</b> </spa><span th:text="${user.getAge()}"/>;<br>
+    <spa><b>Email:</b> </spa><span th:text="${user.getEmail()}"/>;
+
+
+<form th:method="DELETE" th:action="@{/users/{id}(id = ${user.getId()})}">
+    <input type="submit", value="Delete">
+</form>
+
+<form th:method="GET" th:action="@{/users/{id}/edit(id = ${user.getId()})}">
+    <input type="submit", value="Update">
+</form>
+
+
+
+</body>
+</html>
